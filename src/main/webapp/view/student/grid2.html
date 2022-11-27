@@ -1,0 +1,88 @@
+<div id="grid2">
+<button type="button" class="add">Add New</button>
+<table>
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>BirthDate</th>
+			<th>salary</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="stu , iStat : ${data}">
+			<td th:text="${iStat.count}"></td>
+			<td th:text="${stu.getName()}"> something</td>
+			<td th:text="${stu.getAge()}"> something</td>
+			<td th:text="${stu.getBirthDate()}"> something</td>
+			<td><button type="button" value="" th:value="${stu.getStudentId()}" class="address">Address</button></td>
+			<td><button type="button" value="" th:value="${stu.getStudentId()}" class="edit">Edit</button></td>
+			<td><button type="button" value="" th:value="${stu.getStudentId()}" class="delete">Delete</button></td>
+		</tr>
+	</tbody>
+</table>
+<script id="script1">
+jQuery(".add").on({
+	click : function(){
+		var url = "http://localhost:8081/upsert2";
+		jQuery.ajax({
+			type : "POST",
+			url : url,
+			data : {"abc" : "xyz"},
+			success : function(data){
+				console.log("success");
+				console.log(data);
+				jQuery("#root").html(data.upsert2);
+			},
+			error : function(err){
+				console.log("error");
+				console.log(err);
+			}
+		});
+	}
+});
+jQuery(".edit").on({
+	click : function(){
+		var val = jQuery(this).val();
+		var url = "http://localhost:8081/upsert2?studentId="+val;
+		jQuery.ajax({
+			type : "POST",
+			url : url,
+			data : {"abc" : "xyz"},
+			success : function(data){
+				console.log("success");
+				console.log(data);
+				jQuery("#root").html(data.upsert2);
+				
+			},
+			error : function(err){
+				console.log("error");
+				console.log(err);
+			}
+		});
+	}
+});
+jQuery(".delete").on({
+	click : function(){
+		var val = jQuery(this).val();
+		var url = "http://localhost:8081/delete?studentId="+val;
+		jQuery.ajax({
+			type : "POST",
+			url : url,
+			data : {"abc" : "xyz"},
+			success : function(data){
+				console.log("success");
+				console.log(data);
+				jQuery("#root").html(data.grid2);
+			},
+			error : function(err){
+				console.log("error");
+				console.log(err);
+			}
+		});
+	}
+});
+</script>	
+</div>
+

@@ -1,0 +1,11 @@
+<div id="div2">
+	<h1>hello <span th:text="${name}"></h1></h1>
+	<button type="button" id="btn1">Hey</button>
+	<script>
+		jQuery("#btn1").on({
+			click : function(){
+				window.alert("js called")
+			}
+		});
+	</script>
+</div>

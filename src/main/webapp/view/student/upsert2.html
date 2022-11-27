@@ -1,0 +1,63 @@
+<div id="upsert2">
+<form id="form1">
+	<table>
+		<tr>
+			<td><label>Name</label></td>
+			<td><input type="text" name="name" placeholder="enter your name" value="" th:value="${data.getName()}" ></td>
+		</tr>
+		<tr>
+			<td><label>Age</label></td>
+			<td><input type="number" name="age" placeholder="enter your age" value="" th:value="${data.getAge()}" ></td>
+		</tr>
+		<tr>
+			<td><label>BirthDate</label></td>
+			<td><input type="date" name="birthDate" value="" th:value="${data.getBirthDate()}" ></td>
+		</tr>	
+	</table>
+	<input type="text" hidden name="studentId" value="" th:value="${data.getStudentId()}" />
+	<button type="button" class="save">Save</button>
+	<button type="button" class="back">Back</button>
+</form>
+<script>
+	jQuery(".back").on({
+		click : function(){
+			var url = "http://localhost:8081/grid2";
+			jQuery.ajax({
+				type : "POST",
+				url : url,
+				data : {"abc" : "xyz"},
+				success : function(data){
+					console.log("success");
+					console.log(data);
+					jQuery("#root").html(data.grid2);
+					
+				},
+				error : function(err){
+					console.log("error");
+					console.log(err);
+				}
+			});
+		}
+	});
+	jQuery(".save").on({
+		click : function(){
+			var url = "http://localhost:8081/save";
+			jQuery.ajax({
+				type : "POST",
+				url : url,
+				data : jQuery("#form1").serialize(),
+				success : function(data){
+					console.log("success");
+					console.log(data);
+					jQuery("#root").html(data.grid2);
+					
+				},
+				error : function(err){
+					console.log("error");
+					console.log(err);
+				}
+			});
+		}
+	});
+</script>
+</div>
